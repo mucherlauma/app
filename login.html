@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+>
+
+<title>Login</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-family:Arial, sans-serif;
+
+    background:linear-gradient(
+        135deg,
+        #f3fff2,
+        #dff3ce,
+        #b9dd91
+    );
+
+    padding:20px;
+}
+
+.login-card{
+    width:100%;
+    max-width:400px;
+
+    background:#ffffff;
+
+    padding:35px 30px;
+
+    border-radius:22px;
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,0.12);
+}
+
+.logo{
+    width:55px;
+    height:55px;
+
+    margin:0 auto 18px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:16px;
+
+    background:#1fa45b;
+
+    color:white;
+
+    font-size:25px;
+    font-weight:bold;
+}
+
+h1{
+    text-align:center;
+
+    color:#203329;
+
+    font-size:26px;
+
+    margin-bottom:7px;
+}
+
+.subtitle{
+    text-align:center;
+
+    color:#7b887f;
+
+    font-size:13px;
+
+    margin-bottom:28px;
+}
+
+.input-group{
+    margin-bottom:18px;
+}
+
+label{
+    display:block;
+
+    margin-bottom:7px;
+
+    color:#405047;
+
+    font-size:12px;
+
+    font-weight:bold;
+}
+
+input{
+    width:100%;
+    height:50px;
+
+    padding:0 15px;
+
+    border:1px solid #dce5df;
+
+    border-radius:12px;
+
+    outline:none;
+
+    font-size:14px;
+
+    background:#ffffff;
+}
+
+input:focus{
+    border-color:#20a35b;
+
+    box-shadow:
+        0 0 0 4px rgba(32,163,91,0.10);
+}
+
+button{
+    width:100%;
+    height:50px;
+
+    border:none;
+
+    border-radius:13px;
+
+    background:linear-gradient(
+        135deg,
+        #2ab367,
+        #168d4d
+    );
+
+    color:#ffffff;
+
+    font-size:14px;
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+button:hover{
+    box-shadow:
+        0 10px 25px rgba(30,160,90,0.25);
+}
+
+button:disabled{
+    opacity:0.65;
+    cursor:not-allowed;
+}
+
+#otpSection{
+    display:none;
+    margin-top:20px;
+}
+
+.message{
+    display:none;
+
+    margin-bottom:18px;
+
+    padding:11px;
+
+    border-radius:10px;
+
+    font-size:12px;
+
+    line-height:1.5;
+}
+
+.message.success{
+    display:block;
+
+    background:#e8f9ee;
+
+    color:#19804b;
+
+    border:1px solid #c8efd6;
+}
+
+.message.error{
+    display:block;
+
+    background:#fff0ef;
+
+    color:#c43a32;
+
+    border:1px solid #ffd4d1;
+}
+
+.resend-btn{
+    margin-top:12px;
+
+    background:#ffffff;
+
+    color:#168d4d;
+
+    border:1px solid #168d4d;
+}
+
+@media(max-width:500px){
+
+    body{
+        align-items:flex-start;
+        padding:18px 12px;
+    }
+
+    .login-card{
+        margin-top:30px;
+
+        padding:28px 20px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="login-card">
+
+    <div class="logo">
+        C
+    </div>
+
+
+    <h1>
+        Welcome
+    </h1>
+
+
+    <div class="subtitle">
+        Enter your name and Gmail to continue
+    </div>
+
+
+    <div
+        id="message"
+        class="message"
+    ></div>
+
+
+    <!-- NAME -->
+
+    <div class="input-group">
+
+        <label>
+            Name
+        </label>
+
+        <input
+            type="text"
+            id="userName"
+            placeholder="Enter your name"
+            autocomplete="name"
+        >
+
+    </div>
+
+
+    <!-- GMAIL -->
+
+    <div class="input-group">
+
+        <label>
+            Gmail
+        </label>
+
+        <input
+            type="email"
+            id="userEmail"
+            placeholder="example@gmail.com"
+            autocomplete="email"
+        >
+
+    </div>
+
+
+    <!-- SEND OTP -->
+
+    <button
+        type="button"
+        id="sendOtpBtn"
+        onclick="sendOtp()"
+    >
+        Send OTP
+    </button>
+
+
+
+    <!-- OTP SECTION -->
+
+    <div id="otpSection">
+
+        <div class="input-group">
+
+            <label>
+                Enter OTP
+            </label>
+
+            <input
+                type="text"
+                id="otpInput"
+                placeholder="Enter OTP"
+                inputmode="numeric"
+                autocomplete="one-time-code"
+                maxlength="8"
+            >
+
+        </div>
+
+
+        <button
+            type="button"
+            id="verifyOtpBtn"
+            onclick="verifyOtp()"
+        >
+            Verify OTP
+        </button>
+
+
+        <button
+            type="button"
+            class="resend-btn"
+            id="resendOtpBtn"
+            onclick="sendOtp()"
+        >
+            Resend OTP
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<script>
+
+/* =========================================
+   SUPABASE CONFIGURATION
+========================================= */
+
+const SUPABASE_URL =
+"https://elbrqstgodjlrtayvjyd.supabase.co";
+
+
+const SUPABASE_KEY =
+"sb_publishable_zwFco413Z-i4D1MOrZVZgg_l_Jm_xZs";
+
+
+const { createClient } = supabase;
+
+
+const supabaseClient =
+createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+
+/* =========================================
+   SEND OTP
+========================================= */
+
+async function sendOtp(){
+
+    clearMessage();
+
+
+    const name =
+    document
+    .getElementById("userName")
+    .value
+    .trim();
+
+
+    const email =
+    document
+    .getElementById("userEmail")
+    .value
+    .trim()
+    .toLowerCase();
+
+
+
+    /* NAME VALIDATION */
+
+    if(!name){
+
+        showMessage(
+            "Please enter your name.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    if(name.length < 2){
+
+        showMessage(
+            "Please enter a valid name.",
+            "error"
+        );
+
+        return;
+    }
+
+
+
+    /* EMAIL VALIDATION */
+
+    if(!email){
+
+        showMessage(
+            "Please enter your Gmail address.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    if(!validateEmail(email)){
+
+        showMessage(
+            "Please enter a valid email address.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    /* ONLY GMAIL */
+
+    if(!email.endsWith("@gmail.com")){
+
+        showMessage(
+            "Please enter a Gmail address.",
+            "error"
+        );
+
+        return;
+    }
+
+
+
+    const button =
+    document.getElementById(
+        "sendOtpBtn"
+    );
+
+
+    const resendButton =
+    document.getElementById(
+        "resendOtpBtn"
+    );
+
+
+    button.disabled = true;
+    resendButton.disabled = true;
+
+    button.innerText =
+    "Sending OTP...";
+
+
+    try{
+
+
+        const { data, error } =
+        await supabaseClient.auth.signInWithOtp({
+
+            email: email,
+
+            options:{
+
+                shouldCreateUser:true,
+
+                data:{
+                    full_name:name,
+                    name:name
+                }
+
+            }
+
+        });
+
+
+
+        console.log(
+            "OTP DATA:",
+            data
+        );
+
+
+        console.log(
+            "OTP ERROR:",
+            error
+        );
+
+
+
+        if(error){
+
+            showMessage(
+                error.message,
+                "error"
+            );
+
+            return;
+        }
+
+
+
+        /* SHOW OTP FIELD */
+
+        document
+        .getElementById("otpSection")
+        .style.display = "block";
+
+
+        /* LOCK NAME + EMAIL */
+
+        document
+        .getElementById("userName")
+        .readOnly = true;
+
+
+        document
+        .getElementById("userEmail")
+        .readOnly = true;
+
+
+
+        showMessage(
+            "OTP sent successfully to " + email,
+            "success"
+        );
+
+
+
+        setTimeout(()=>{
+
+            document
+            .getElementById("otpInput")
+            .focus();
+
+        },200);
+
+
+
+    }catch(error){
+
+        console.error(
+            "Send OTP Error:",
+            error
+        );
+
+
+        showMessage(
+            "Unable to send OTP. Please try again.",
+            "error"
+        );
+
+    }finally{
+
+        button.disabled = false;
+
+        resendButton.disabled = false;
+
+        button.innerText =
+        "Send OTP";
+
+    }
+
+}
+
+
+
+/* =========================================
+   VERIFY OTP
+========================================= */
+
+async function verifyOtp(){
+
+    clearMessage();
+
+
+    const name =
+    document
+    .getElementById("userName")
+    .value
+    .trim();
+
+
+    const email =
+    document
+    .getElementById("userEmail")
+    .value
+    .trim()
+    .toLowerCase();
+
+
+    const otp =
+    document
+    .getElementById("otpInput")
+    .value
+    .trim();
+
+
+
+    if(!otp){
+
+        showMessage(
+            "Please enter the OTP.",
+            "error"
+        );
+
+        return;
+    }
+
+
+
+    const button =
+    document.getElementById(
+        "verifyOtpBtn"
+    );
+
+
+    button.disabled = true;
+
+    button.innerText =
+    "Verifying...";
+
+
+    try{
+
+
+        const { data, error } =
+        await supabaseClient.auth.verifyOtp({
+
+            email:email,
+
+            token:otp,
+
+            type:"email"
+
+        });
+
+
+
+        console.log(
+            "VERIFY DATA:",
+            data
+        );
+
+
+        console.log(
+            "VERIFY ERROR:",
+            error
+        );
+
+
+
+        if(error){
+
+            showMessage(
+                "Invalid or expired OTP.",
+                "error"
+            );
+
+            return;
+        }
+
+
+
+        if(!data || !data.user){
+
+            showMessage(
+                "OTP verification failed.",
+                "error"
+            );
+
+            return;
+        }
+
+
+
+        const user =
+        data.user;
+
+
+
+        /* =================================
+           SAVE USER DETAILS
+        ================================= */
+
+        const loggedUser = {
+
+            id:user.id,
+
+            name:name,
+
+            username:name,
+
+            email:email,
+
+            login_type:"email"
+
+        };
+
+
+        localStorage.setItem(
+            "loggedUser",
+            JSON.stringify(loggedUser)
+        );
+
+
+        localStorage.setItem(
+            "userName",
+            name
+        );
+
+
+        localStorage.setItem(
+            "userEmail",
+            email
+        );
+
+
+
+        showMessage(
+            "OTP verified successfully.",
+            "success"
+        );
+
+
+
+        /* =================================
+           REDIRECT
+        ================================= */
+
+        setTimeout(()=>{
+
+            window.location.href =
+            "home.html";
+
+        },700);
+
+
+
+    }catch(error){
+
+        console.error(
+            "Verify OTP Error:",
+            error
+        );
+
+
+        showMessage(
+            "Unable to verify OTP.",
+            "error"
+        );
+
+    }finally{
+
+        button.disabled = false;
+
+        button.innerText =
+        "Verify OTP";
+
+    }
+
+}
+
+
+
+/* =========================================
+   EMAIL VALIDATION
+========================================= */
+
+function validateEmail(email){
+
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    .test(email);
+
+}
+
+
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+function showMessage(text,type){
+
+    const message =
+    document.getElementById(
+        "message"
+    );
+
+
+    message.innerText =
+    text;
+
+
+    message.className =
+    "message " + type;
+
+}
+
+
+
+/* =========================================
+   CLEAR MESSAGE
+========================================= */
+
+function clearMessage(){
+
+    const message =
+    document.getElementById(
+        "message"
+    );
+
+
+    message.innerText = "";
+
+    message.className =
+    "message";
+
+}
+
+</script>
+
+</body>
+</html>

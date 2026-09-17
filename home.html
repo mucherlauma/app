@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Institution Dashboard</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#eef2ff,#f8faff,#eef7ff);
+    color:#1f2937;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:230px;
+    height:100vh;
+    background:#ffffff;
+    border-right:1px solid #e5e7eb;
+    padding:25px 18px;
+
+    display:flex;
+    flex-direction:column;
+}
+
+/* LOGO */
+
+.logo-area{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:5px 8px 25px;
+    border-bottom:1px solid #eee;
+}
+
+.logo{
+    width:45px;
+    height:45px;
+    background:#4f46e5;
+    color:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:12px;
+
+    font-size:17px;
+    font-weight:bold;
+}
+
+.logo-text h3{
+    font-size:15px;
+}
+
+.logo-text p{
+    font-size:11px;
+    color:#888;
+    margin-top:3px;
+}
+
+
+/* MENU */
+
+.menu{
+    margin-top:25px;
+    flex:1;
+}
+
+.menu-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    padding:13px 14px;
+
+    margin-bottom:8px;
+
+    border-radius:10px;
+
+    text-decoration:none;
+
+    color:#555;
+
+    font-size:14px;
+
+    transition:.2s;
+}
+
+.menu-item:hover{
+    background:#f1f3ff;
+    color:#4f46e5;
+}
+
+.menu-item.active{
+    background:#eef2ff;
+    color:#4f46e5;
+    font-weight:600;
+}
+
+.menu-icon{
+    width:25px;
+    text-align:center;
+    font-size:17px;
+}
+
+
+/* LOGOUT */
+
+.logout{
+    border-top:1px solid #eee;
+    padding-top:18px;
+}
+
+.logout-btn{
+    width:100%;
+
+    border:none;
+
+    background:#fff1f2;
+    color:#dc2626;
+
+    padding:13px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:14px;
+    font-weight:600;
+}
+
+.logout-btn:hover{
+    background:#ffe4e6;
+}
+
+
+/* ================= MAIN ================= */
+
+.main{
+    margin-left:230px;
+    min-height:100vh;
+}
+
+
+/* HEADER */
+
+.header{
+    height:75px;
+
+    background:white;
+
+    border-bottom:1px solid #e5e7eb;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 35px;
+}
+
+.header-left h2{
+    font-size:19px;
+}
+
+.header-left p{
+    color:#888;
+    font-size:12px;
+    margin-top:4px;
+}
+
+.profile{
+    width:42px;
+    height:42px;
+
+    border-radius:50%;
+
+    background:#eef2ff;
+    color:#4f46e5;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-weight:bold;
+}
+
+
+/* CONTENT */
+
+.container{
+    padding:30px 35px;
+    max-width:1400px;
+}
+
+
+/* WELCOME */
+
+.welcome{
+    background:linear-gradient(120deg,#4338ca,#6366f1);
+
+    border-radius:20px;
+
+    padding:32px;
+
+    color:white;
+
+    margin-bottom:25px;
+}
+
+.welcome small{
+    font-size:11px;
+    opacity:.8;
+}
+
+.welcome h1{
+    font-size:27px;
+    margin:8px 0;
+}
+
+.welcome p{
+    font-size:13px;
+    opacity:.85;
+}
+
+
+/* STATS */
+
+.stats{
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:16px;
+
+    margin-bottom:30px;
+}
+
+.stat{
+    background:white;
+
+    padding:22px;
+
+    border-radius:15px;
+
+    border:1px solid #e8e8ee;
+}
+
+.stat p{
+    color:#777;
+    font-size:12px;
+}
+
+.stat h2{
+    margin-top:10px;
+    font-size:25px;
+}
+
+
+/* TITLE */
+
+.title{
+    font-size:18px;
+    margin-bottom:15px;
+}
+
+
+/* CARDS */
+
+.cards{
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:16px;
+}
+
+.card{
+    background:white;
+
+    padding:22px;
+
+    border-radius:16px;
+
+    border:1px solid #e8e8ee;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.card:hover{
+    transform:translateY(-3px);
+
+    box-shadow:0 8px 25px rgba(0,0,0,.06);
+}
+
+.card-icon{
+    width:43px;
+    height:43px;
+
+    background:#eef2ff;
+    color:#4f46e5;
+
+    border-radius:11px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    margin-bottom:15px;
+
+    font-size:18px;
+}
+
+.card h3{
+    font-size:15px;
+    margin-bottom:7px;
+}
+
+.card p{
+    color:#777;
+    font-size:12px;
+    line-height:1.6;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media(max-width:800px){
+
+    .sidebar{
+        width:75px;
+        padding:20px 10px;
+    }
+
+    .logo-area{
+        justify-content:center;
+        padding:0 0 20px;
+    }
+
+    .logo-text{
+        display:none;
+    }
+
+    .menu-item{
+        justify-content:center;
+        padding:13px 5px;
+    }
+
+    .menu-item span:last-child{
+        display:none;
+    }
+
+    .menu-icon{
+        font-size:20px;
+    }
+
+    .logout-btn{
+        font-size:0;
+    }
+
+    .logout-btn::after{
+        content:"↪";
+        font-size:20px;
+    }
+
+    .main{
+        margin-left:75px;
+    }
+
+    .header{
+        padding:0 18px;
+    }
+
+    .container{
+        padding:20px 18px;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .cards{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+
+/* SMALL MOBILE */
+
+@media(max-width:500px){
+
+    .header-left p{
+        display:none;
+    }
+
+    .welcome{
+        padding:23px;
+    }
+
+    .welcome h1{
+        font-size:21px;
+    }
+
+    .stats{
+        gap:10px;
+    }
+
+    .stat{
+        padding:16px;
+    }
+
+    .stat h2{
+        font-size:20px;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <!-- LOGO -->
+
+    <div class="logo-area">
+
+        <div class="logo">
+            CS
+        </div>
+
+        <div class="logo-text">
+            <h3>Institution</h3>
+            <p>Management</p>
+        </div>
+
+    </div>
+
+
+    <!-- MENU -->
+
+    <div class="menu">
+
+        <a href="#" class="menu-item active">
+
+            <span class="menu-icon">⌂</span>
+
+            <span>Dashboard</span>
+
+        </a>
+
+    </div>
+
+
+    <!-- LOGOUT -->
+
+    <div class="logout">
+
+        <button
+            class="logout-btn"
+            onclick="logout()">
+
+            Logout
+
+        </button>
+
+    </div>
+
+</aside>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="main">
+
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="header-left">
+
+            <h2>Dashboard</h2>
+
+            <p>School / College Management System</p>
+
+        </div>
+
+
+        <div class="profile">
+            A
+        </div>
+
+    </header>
+
+
+
+    <!-- ================= CONTENT ================= -->
+
+    <main class="container">
+
+
+        <!-- WELCOME -->
+
+        <section class="welcome">
+
+            <small>INSTITUTION DASHBOARD</small>
+
+            <h1>Welcome back 👋</h1>
+
+            <p>
+                Manage your institution from one place.
+            </p>
+
+        </section>
+
+
+
+        <!-- STATS -->
+
+        <section class="stats">
+
+            <div class="stat">
+
+                <p>Total Students</p>
+
+                <h2>1,240</h2>
+
+            </div>
+
+
+            <div class="stat">
+
+                <p>Today's Attendance</p>
+
+                <h2>92%</h2>
+
+            </div>
+
+
+            <div class="stat">
+
+                <p>Total Staff</p>
+
+                <h2>86</h2>
+
+            </div>
+
+
+            <div class="stat">
+
+                <p>Pending Fees</p>
+
+                <h2>₹42K</h2>
+
+            </div>
+
+        </section>
+
+
+
+        <h2 class="title">
+            Management
+        </h2>
+
+
+
+        <!-- CARDS -->
+
+        <section class="cards">
+
+
+            <div class="card">
+
+                <div class="card-icon">👨‍🎓</div>
+
+                <h3>Students</h3>
+
+                <p>
+                    View and manage student information,
+                    classes and sections.
+                </p>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <div class="card-icon">✓</div>
+
+                <h3>Attendance</h3>
+
+                <p>
+                    Manage daily attendance and
+                    student attendance reports.
+                </p>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <div class="card-icon">₹</div>
+
+                <h3>Fee Management</h3>
+
+                <p>
+                    Track payments, pending fees
+                    and student receipts.
+                </p>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <div class="card-icon">📊</div>
+
+                <h3>Progress Reports</h3>
+
+                <p>
+                    View marks and academic
+                    student performance.
+                </p>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <div class="card-icon">📢</div>
+
+                <h3>Announcements</h3>
+
+                <p>
+                    Publish important notices
+                    for students and parents.
+                </p>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <div class="card-icon">⚙</div>
+
+                <h3>Settings</h3>
+
+                <p>
+                    Manage institution information,
+                    classes and branches.
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<script>
+
+function logout(){
+
+    // change login.html to your actual login page
+
+    window.location.href = "login.html";
+
+}
+
+</script>
+
+
+</body>
+</html>
